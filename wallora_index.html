@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wallora - beautiful free wallpapers for mobile and desktop.">
+  <title>Wallora — Free Wallpapers</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Arial,Helvetica,sans-serif;background:#0b0d12;color:#f5f7fb;line-height:1.5}
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1180px,92%);margin:auto}
+    header{position:sticky;top:0;z-index:10;background:rgba(11,13,18,.94);backdrop-filter:blur(12px);border-bottom:1px solid #20242d}
+    nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .logo{font-size:26px;font-weight:800;letter-spacing:-1px}.logo span{opacity:.55}
+    .navlinks{display:flex;gap:22px;color:#aeb5c2;font-size:14px}
+    .navlinks a:hover{color:#fff}
+    .hero{padding:72px 0 42px;text-align:center}
+    .hero h1{font-size:clamp(38px,7vw,72px);line-height:1.02;letter-spacing:-3px}
+    .hero h1 span{opacity:.48}
+    .hero p{max-width:620px;margin:20px auto 28px;color:#aeb5c2}
+    .search{display:flex;max-width:650px;margin:auto;background:#151922;border:1px solid #292f3a;border-radius:16px;padding:7px}
+    .search input{flex:1;background:transparent;border:0;outline:0;color:#fff;padding:14px;font-size:16px}
+    .search button{border:0;border-radius:11px;padding:0 22px;font-weight:700;cursor:pointer}
+    .adslot{min-height:90px;border:1px dashed #303643;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#656d7b;font-size:12px;margin:25px 0}
+    .categories{display:flex;gap:10px;overflow:auto;padding:10px 0 25px}
+    .cat{white-space:nowrap;background:#151922;border:1px solid #292f3a;padding:10px 16px;border-radius:999px;color:#bfc5cf;cursor:pointer}
+    .cat.active,.cat:hover{background:#f5f7fb;color:#0b0d12}
+    .section-head{display:flex;justify-content:space-between;align-items:center;margin:18px 0}
+    .section-head h2{font-size:24px}
+    .section-head span{color:#7f8795;font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .card{background:#12151c;border:1px solid #232833;border-radius:15px;overflow:hidden;transition:.2s}
+    .card:hover{transform:translateY(-3px);border-color:#3a414f}
+    .thumb{aspect-ratio:9/13;background:#1a1e27;overflow:hidden}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .info{padding:12px}.info h3{font-size:14px;margin-bottom:4px}.info p{font-size:12px;color:#858d9b}
+    .download{display:block;text-align:center;margin-top:10px;padding:9px;border-radius:9px;background:#f5f7fb;color:#0b0d12;font-size:13px;font-weight:700}
+    footer{margin-top:60px;border-top:1px solid #20242d;padding:35px 0;color:#777f8d;font-size:13px}
+    @media(max-width:850px){.grid{grid-template-columns:repeat(3,1fr)}.navlinks{display:none}}
+    @media(max-width:560px){.hero{padding-top:48px}.search button{padding:0 15px}.grid{grid-template-columns:repeat(2,1fr);gap:10px}.section-head h2{font-size:20px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <a class="logo" href="#">Wallora<span>.</span></a>
+      <div class="navlinks">
+        <a href="#home">Home</a><a href="#categories">Categories</a><a href="#latest">Latest</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="home" class="container">
+  <section class="hero">
+    <h1>Beautiful wallpapers.<br><span>Free to download.</span></h1>
+    <p>Discover high-quality wallpapers for your phone and desktop. Search, explore and download your favorites.</p>
+    <form class="search" id="searchForm">
+      <input id="searchInput" type="search" placeholder="Search wallpapers..." aria-label="Search wallpapers">
+      <button type="submit">Search</button>
+    </form>
+  </section>
+
+  <!-- ADSTERRA TOP AD: paste your Adsterra code here -->
+  <div class="adslot">Adsterra ad space</div>
+
+  <section id="categories">
+    <div class="categories">
+      <button class="cat active" data-filter="all">All</button>
+      <button class="cat" data-filter="4k">4K</button>
+      <button class="cat" data-filter="nature">Nature</button>
+      <button class="cat" data-filter="cars">Cars</button>
+      <button class="cat" data-filter="abstract">Abstract</button>
+      <button class="cat" data-filter="animals">Animals</button>
+      <button class="cat" data-filter="city">City</button>
+      <button class="cat" data-filter="amoled">AMOLED</button>
+    </div>
+  </section>
+
+  <section id="latest">
+    <div class="section-head"><h2>Latest wallpapers</h2><span id="count"></span></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <!-- ADSTERRA MIDDLE AD: paste your Adsterra code here -->
+  <div class="adslot">Adsterra ad space</div>
+
+  <div class="section-head"><h2>More to explore</h2></div>
+  <div class="grid" id="grid2"></div>
+
+  <!-- ADSTERRA BOTTOM AD: paste your Adsterra code here -->
+  <div class="adslot">Adsterra ad space</div>
+</main>
+
+<footer>
+  <div class="container">© 2026 Wallora. Free wallpapers for personal use.</div>
+</footer>
+
+<script>
+const wallpapers=[
+ {title:"Mountain Sunrise",cat:"nature 4k",url:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=85"},
+ {title:"Night City",cat:"city 4k",url:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=85"},
+ {title:"Sports Car",cat:"cars",url:"https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=85"},
+ {title:"Ocean Waves",cat:"nature",url:"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85"},
+ {title:"Abstract Glow",cat:"abstract amoled",url:"https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=900&q=85"},
+ {title:"Wild Wolf",cat:"animals",url:"https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=900&q=85"},
+ {title:"Forest Road",cat:"nature",url:"https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=85"},
+ {title:"Modern Architecture",cat:"city",url:"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=85"}
+];
+
+function render(list,target){
+  target.innerHTML=list.map(w=>`
+    <article class="card">
+      <div class="thumb"><img src="${w.url}" alt="${w.title} wallpaper" loading="lazy"></div>
+      <div class="info">
+        <h3>${w.title}</h3><p>${w.cat.split(" ").join(" · ")}</p>
+        <a class="download" href="${w.url}" target="_blank" rel="noopener">Download</a>
+      </div>
+    </article>`).join("");
+  document.getElementById("count").textContent=list.length+" wallpapers";
+}
+render(wallpapers,document.getElementById("grid"));
+render(wallpapers.slice().reverse(),document.getElementById("grid2"));
+
+document.querySelectorAll(".cat").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+   document.querySelectorAll(".cat").forEach(x=>x.classList.remove("active"));
+   btn.classList.add("active");
+   const f=btn.dataset.filter;
+   const list=f==="all"?wallpapers:wallpapers.filter(w=>w.cat.includes(f));
+   render(list,document.getElementById("grid"));
+ });
+});
+
+document.getElementById("searchForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const q=document.getElementById("searchInput").value.toLowerCase().trim();
+ render(q?wallpapers.filter(w=>(w.title+" "+w.cat).toLowerCase().includes(q)):wallpapers,document.getElementById("grid"));
+});
+</script>
+</body>
+</html>
